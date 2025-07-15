@@ -18,7 +18,7 @@ const swaggerOptions = {
     }, 
     servers: [  
       {
-        url: 'https://eb-project-backend-ecru.vercel.app',
+        url: 'eb-project-backend-seven.vercel.app',
       },
     ], 
   }, 
