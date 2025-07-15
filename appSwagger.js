@@ -31,7 +31,7 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); 
 app.use('/api', userRoutes); // Prefix all user routes with /api 
  
-app.listen(PORT, () => { 
-  console.log(`Server running on http://localhost:${PORT}`); 
-  console.log(`Swagger docs at http://localhost:${PORT}/api-docs`); 
-}); 
+const serverless = require('serverless-http');
+
+// Export as serverless handler for Vercel
+module.exports.handler = serverless(app);
