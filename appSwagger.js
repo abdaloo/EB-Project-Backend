@@ -16,15 +16,9 @@ const swaggerOptions = {
       description: 
         'Welcome to the EB Planty User API!\n\nThis interactive documentation provides a comprehensive overview of all userrelated endpoints for the EB Planty platform. Easily manage user accounts, authentication, and profile operations with clear request and response examples.\n\nExplore, test, and integrate with confidence.', 
     }, 
-    servers: [ 
-      {   
-        url: 'http://localhost:3003', 
-      }, 
-      { 
-        url: 'https://eb-project-backend-production.up.railway.app', 
-      }, 
+    servers: [  
       {
-        url: 'http://eb-project-backend-ynuj.vercel.app',
+        url: 'https://eb-project-backend-ecru.vercel.app',
       },
     ], 
   }, 
