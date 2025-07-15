@@ -18,7 +18,7 @@ const swaggerOptions = {
     }, 
     servers: [  
       {
-        url: 'eb-project-backend-seven.vercel.app',
+        url: 'https://eb-project-backend-seven.vercel.app',
       },
     ], 
   }, 
@@ -32,6 +32,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api', userRoutes); // Prefix all user routes with /api 
  
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Swagger Server running on http://localhost:${PORT}`);
   console.log(`Swagger docs at http://localhost:${PORT}/api-docs`);
 });
