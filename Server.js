@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 3003;
 
 app.use(cors());
 app.use(exp.json());
+app.get('/',(req,res)=>{
+    res.send("hi there")
+})
 app.use('/uploads', exp.static(path.join(__dirname, 'uploads')));
 app.use('/api/v0/user', UserRoute);
 app.use('/api/v0/plants', PlantRoute);
