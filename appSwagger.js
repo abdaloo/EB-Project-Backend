@@ -2,6 +2,7 @@ const express = require('express');
 const swaggerUi = require('swagger-ui-express'); 
 const swaggerJsdoc = require('swagger-jsdoc'); 
 const userRoutes = require('./routes/userSwagger'); 
+const path = require('path');
  
 const app = express(); 
 const PORT = process.env.PORT || 3004;
@@ -18,17 +19,12 @@ const swaggerOptions = {
     }, 
     servers: [  
       {
-        // url: 'https://eb-project-backend-seven.vercel.app',
-        // url: 'https://eb-project-backend-pied.vercel.app',
-        // url: 'https://eb-project-backend-production-ca3b.up.railway.app',
         url: 'https://planty-backend-production.up.railway.app',
-      },
-      {
-        url: 'https://eb-project-backend-production-ca3b.up.railway.app',
       }
     ], 
   }, 
-  apis: ['./routes/userSwagger.js'], // This must point to your route files 
+  // apis: ['./routes/userSwagger.js'], // This must point to your route files 
+  apis: [path.join(__dirname, './routes/userSwagger.js')]
 }; 
  
 const swaggerSpec = swaggerJsdoc(swaggerOptions); 
@@ -36,7 +32,13 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 // Middleware 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); 
 app.use('/api', userRoutes); // Prefix all user routes with /api 
- 
+
+// Health Check
+app.get('/health', (req, res) => res.send('App is healthy'));
+
+// 404 route
+app.use((req, res) => res.status(404).send('Route not found'));
+
 app.listen(PORT, () => {
   console.log(`Swagger Server running on http://localhost:${PORT}`);
   console.log(`Swagger docs at http://localhost:${PORT}/api-docs`);
