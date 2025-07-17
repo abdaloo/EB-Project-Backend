@@ -5,7 +5,7 @@ const PlantRoute = require('./routes/PlantRoute');
 const connectDB = require('./config/ConnectDb');
 const cors = require('cors');
 const path = require('path');
-require('dotenv').config();
+require('dotenv').config({ quiet: true });
 
 const PORT = process.env.PORT;
 
