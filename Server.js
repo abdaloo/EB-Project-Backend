@@ -11,6 +11,7 @@ const PORT = process.env.PORT;
 
 app.use(cors());
 app.use(exp.json());
+connectDB();
 app.get('/',(req,res)=>{
     res.send("hi there")
 })
@@ -19,6 +20,5 @@ app.use('/api/v0/user', UserRoute);
 app.use('/api/v0/plants', PlantRoute);
 
 app.listen(PORT, () => {
-    connectDB();
     console.log('Server is running: http://localhost:' + PORT);
 });

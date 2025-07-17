@@ -20,10 +20,10 @@ const swaggerOptions = {
     }, 
     servers: [  
       {
-        url: 'https://planty-backend-production.up.railway.app',
+        url: 'http://localhost:3003',
       },
       {
-        url: 'https://eb-project-backend-wheat.vercel.app',
+        url: 'https://sample-three-khaki.vercel.app',
       }
     ], 
   }, 
