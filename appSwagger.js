@@ -20,10 +20,10 @@ const swaggerOptions = {
     }, 
     servers: [  
       {
-        url: 'http://localhost:3003',
+        url: 'https://sample-three-khaki.vercel.app',
       },
       {
-        url: 'https://sample-three-khaki.vercel.app',
+        url: 'http://localhost:3003',
       }
     ], 
   }, 

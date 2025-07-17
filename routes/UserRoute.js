@@ -8,7 +8,7 @@ router.post('/loginUser', LoginUser);
 router.put('/updateUser/:id', UpdateUser);
 router.delete('/deleteUser/:id', DeleteUser);
 router.get('/getUserAll', GetUserAll);
-router.get('/getSpecificUser/:id', GetSpecificUser);
+router.get('/getSpecificUser/:email', GetSpecificUser);
 router.post('/addToCart', AddToCart);
 
 module.exports = router;

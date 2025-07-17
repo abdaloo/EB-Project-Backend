@@ -1,19 +1,19 @@
 Users APis:
 
-Get All User API:    https://eb-project-backend-production.up.railway.app/api/v0/user/getUserAll
-GetSpecificUserAPI:  https://eb-project-backend-production.up.railway.app/api/v0/user/getSpecificUser/:id
-Create User API:     https://eb-project-backend-production.up.railway.app/api/v0/user/createUser
-Login User API:      https://eb-project-backend-production.up.railway.app/api/v0/user/loginUser
-Delete User API:     https://eb-project-backend-production.up.railway.app/api/v0/user/deleteUser/:id
-Update User API:     https://eb-project-backend-production.up.railway.app/api/v0/user/updateUser/:id
-Add to Cart API:     https://eb-project-backend-production.up.railway.app/api/v0/user/addToCart
+Get All User API:    https://sample-three-khaki.vercel.app/api/v0/user/getUserAll
+GetSpecificUserAPI:  https://sample-three-khaki.vercel.app/api/v0/user/getSpecificUser/:id
+Create User API:     https://sample-three-khaki.vercel.app/api/v0/user/createUser
+Login User API:      https://sample-three-khaki.vercel.app/api/v0/user/loginUser
+Delete User API:     https://sample-three-khaki.vercel.app/api/v0/user/deleteUser/:id
+Update User API:     https://sample-three-khaki.vercel.app/api/v0/user/updateUser/:id
+Add to Cart API:     https://sample-three-khaki.vercel.app/api/v0/user/addToCart
 
 
 Plants API's:
 
-image upload API:    https://eb-project-backend-production.up.railway.app/api/v0/plants/upload-image
-getAll Data API:     https://eb-project-backend-production.up.railway.app/api/v0/plants/getAll
-getOne Data API:     https://eb-project-backend-production.up.railway.app/api/v0/plants/getOne/:id
-create Data API:     https://eb-project-backend-production.up.railway.app/api/v0/plants/create
-update Data API:     https://eb-project-backend-production.up.railway.app/api/v0/plants/update/:id
-delete Data API:     https://eb-project-backend-production.up.railway.app/api/v0/plants/delete/:id
+image upload API:    https://sample-three-khaki.vercel.app/api/v0/plants/upload-image
+getAll Data API:     https://sample-three-khaki.vercel.app/api/v0/plants/getAll
+getOne Data API:     https://sample-three-khaki.vercel.app/api/v0/plants/getOne/:id
+create Data API:     https://sample-three-khaki.vercel.app/api/v0/plants/create
+update Data API:     https://sample-three-khaki.vercel.app/api/v0/plants/update/:id
+delete Data API:     https://sample-three-khaki.vercel.app/api/v0/plants/delete/:id

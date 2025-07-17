@@ -144,8 +144,8 @@ exports.GetUserAll = async (req, res) =>{
 
 exports.GetSpecificUser = async (req,res) =>{
     try {
-        const Find_users = req.params.id;
-        const FindUser = await User.findOne({_id:Find_users});
+        const Find_users = req.params.email;
+        const FindUser = await User.findOne({email:Find_users});
 
         if(!FindUser) return res.status(404).json({msg: "User not found"});
 
