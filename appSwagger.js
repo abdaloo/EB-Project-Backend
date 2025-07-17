@@ -21,6 +21,9 @@ const swaggerOptions = {
     servers: [  
       {
         url: 'https://planty-backend-production.up.railway.app',
+      },
+      {
+        url: 'https://eb-project-backend-wheat.vercel.app',
       }
     ], 
   }, 
