@@ -1,9 +1,9 @@
  const mongoose = require('mongoose');
+ require('dotenv').config();
 
-const dbURI = process.env.MONGO_URI||'mongodb+srv://Ebpro:Hello123@cluster0.aisosva.mongodb.net/EbProject';
 const connectDB = async () => {
     try{
-        const connect = await mongoose.connect(dbURI);
+        const connect = await mongoose.connect(process.env.MONGO_URI);
        if(connect){
            console.log(`MongoDB connected successfully`);
        }else{

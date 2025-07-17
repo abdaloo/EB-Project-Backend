@@ -3,9 +3,10 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc'); 
 const userRoutes = require('./routes/userSwagger'); 
 const path = require('path');
+require('dotenv').config();
  
 const app = express(); 
-const PORT = process.env.PORT || 3004;
+const PORT = process.env.PORT2;
  
 // Swagger configuration 
 const swaggerOptions = { 
