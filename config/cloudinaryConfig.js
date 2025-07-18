@@ -13,7 +13,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'plants', // Cloudinary folder
+    folder: 'uploads/plants', // Cloudinary folder
     allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
   },
 });
