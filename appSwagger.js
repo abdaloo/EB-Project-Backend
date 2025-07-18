@@ -1,14 +1,6 @@
-const express = require('express'); 
-const swaggerUi = require('swagger-ui-express'); 
 const swaggerJsdoc = require('swagger-jsdoc'); 
-const userRoutes = require('./routes/userSwagger'); 
 const path = require('path');
-require('dotenv').config();
- 
-const app = express(); 
-const PORT = process.env.PORT2;
- 
-// Swagger configuration 
+
 const swaggerOptions = { 
   definition: { 
     openapi: '3.0.0', 
@@ -20,30 +12,15 @@ const swaggerOptions = {
     }, 
     servers: [  
       {
-        url: 'https://sample-three-khaki.vercel.app',
+        url: 'https://eb-project-backend-kappa.vercel.app',
       },
       {
         url: 'http://localhost:3003',
       }
     ], 
   }, 
-  // apis: ['./routes/userSwagger.js'], // This must point to your route files 
   apis: [path.join(__dirname, './routes/userSwagger.js')]
 }; 
  
 const swaggerSpec = swaggerJsdoc(swaggerOptions); 
- 
-// Middleware 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); 
-app.use('/api', userRoutes); // Prefix all user routes with /api 
-
-// Health Check
-app.get('/health', (req, res) => res.send('App is healthy'));
-
-// 404 route
-app.use((req, res) => res.status(404).send('Route not found'));
-
-app.listen(PORT, () => {
-  console.log(`Swagger Server running on http://localhost:${PORT}`);
-  console.log(`Swagger docs at http://localhost:${PORT}/api-docs`);
-});
+module.exports = swaggerSpec;
