@@ -20,11 +20,12 @@ app.use(cors());
 app.use(express.json());
 
 // Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
 app.get('/swagger.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Access-Control-Allow-Origin', '*'); 
   res.send(swaggerSpec);
 });
+
 
 // Connect MongoDB
 connectDB();
