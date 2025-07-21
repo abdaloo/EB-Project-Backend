@@ -16,5 +16,9 @@
       "src": "/(.*)",
       "dest": "/Server.js"
     }
+  ],
+  "rewrites": [
+    { "source": "/api-docs", "destination": "/api/api-docs" },
+    { "source": "/swagger.json", "destination": "/api/swagger.json" }
   ]
 }

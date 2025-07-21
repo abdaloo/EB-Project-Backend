@@ -16,8 +16,9 @@ const swaggerOptions = {
       }
     ], 
   }, 
-  apis: ['./routes/*.js']
+  apis: ['./routes/UserRoute.js'],
 }; 
  
-const swaggerSpec = swaggerJsdoc(swaggerOptions); 
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+// console.log(JSON.stringify(swaggerSpec, null, 2)); 
 module.exports = swaggerSpec;
