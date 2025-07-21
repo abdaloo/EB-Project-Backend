@@ -11,7 +11,7 @@ Add to Cart API:     https://sample-three-khaki.vercel.app/api/v0/user/addToCart
 
 Plants API's:
 
-image upload API:    https://sample-three-khaki.vercel.app/api/v0/plants/upload-image
+image upload API:    https://sample-three-khaki.vercel.app/api/v0/plants/uploadImage
 getAll Data API:     https://sample-three-khaki.vercel.app/api/v0/plants/getAll
 getOne Data API:     https://sample-three-khaki.vercel.app/api/v0/plants/getOne/:id
 create Data API:     https://sample-three-khaki.vercel.app/api/v0/plants/create
