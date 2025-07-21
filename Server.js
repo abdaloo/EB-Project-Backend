@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const path = require('path');
 require('dotenv').config({ quiet: true });
+
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
 // Routes
 const UserRoute = require('./routes/UserRoute');
@@ -20,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 // Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true, customCssUrl: CSS_URL }));
 app.get('/swagger.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   // res.setHeader('Access-Control-Allow-Origin', '*'); 
