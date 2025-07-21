@@ -1,23 +1,29 @@
-// cloudinaryConfig.js
+// config/cloudinaryConfig.js
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
-require('dotenv').config();
+const { config } = require('dotenv');
+config(); // Load .env
 
+// Cloudinary credentials
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET
+  api_secret: process.env.CLOUD_API_SECRET,
 });
 
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'uploads/plants', // Cloudinary folder
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-  },
-});
-
+// Multer config (in-memory)
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-module.exports = { upload };
+// Helper to upload to Cloudinary from memory
+const uploadToCloudinary = async (file) => {
+  const fileBase64 = file.buffer.toString('base64');
+  const dataURI = `data:${file.mimetype};base64,${fileBase64}`;
+  return await cloudinary.uploader.upload(dataURI);
+};
+
+module.exports = {
+  cloudinary,
+  upload,
+  uploadToCloudinary,
+};
