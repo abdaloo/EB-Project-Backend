@@ -1,51 +1,34 @@
 const Plant = require('../models/PlantTypes');
-const PlantImage = require('../models/PlantImageModel');
-const multer = require('multer');
-const path = require('path');
+const { upload, uploadToCloudinary } = require('../config/cloudinaryConfig');
 
-// Configure multer for image upload
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, 'uploads/plants/');
-    },
-    filename: function(req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({
-    storage: storage,
-    fileFilter: function(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
-            return cb(new Error('Only image files are allowed!'), false);
-        }
-        cb(null, true);
-    }
-}).single('image');
-
-// Upload plant image
+// Upload plant image to Cloudinary
 exports.uploadPlantImage = async (req, res) => {
     try {
-        upload(req, res, async function(err) {
+        upload.single('image')(req, res, async function(err) {
             if (err) {
                 return res.status(400).json({ message: err.message });
             }
 
             if (!req.file) {
-                return res.status(400).json({ message: 'Please upload an image' });
+                return res.status(400).json({ message: 'No image file provided' });
             }
 
-            const plantImage = new PlantImage({
-                filename: req.file.filename,
-                path: req.file.path
-            });
+            // Validate PNG extension (case-insensitive)
+            const fileName = req.file.originalname || req.file.filename;
+            if (!fileName || !/\.png$/i.test(fileName)) {
+                return res.status(400).json({ message: 'Only PNG images are allowed (png or PNG extension)' });
+            }
 
-            await plantImage.save();
-
-            res.status(201).json({
-                message: 'Image uploaded successfully',
-                image: plantImage
-            });
+            try {
+                const result = await uploadToCloudinary(req.file);
+                res.status(201).json({
+                    message: 'Image uploaded successfully',
+                    imageUrl: result.secure_url,
+                });
+            } catch (cloudErr) {
+                console.error('Upload Error:', cloudErr);
+                res.status(500).json({ message: 'Upload failed', error: cloudErr.message });
+            }
         });
     } catch (error) {
         res.status(500).json({ message: 'Error uploading image', error: error.message });

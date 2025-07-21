@@ -2,7 +2,7 @@
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 const { config } = require('dotenv');
-config(); // Load .env
+config({ quiet: true }); // Load .env
 
 // Cloudinary credentials
 cloudinary.config({
