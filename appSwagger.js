@@ -13,9 +13,6 @@ const swaggerOptions = {
     servers: [  
       {
         url: 'https://eb-project-backend-kappa.vercel.app',
-      },
-      {
-        url: 'http://localhost:3003',
       }
     ], 
   }, 
