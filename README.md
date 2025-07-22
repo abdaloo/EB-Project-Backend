@@ -89,6 +89,33 @@ The API includes comprehensive interactive documentation powered by Swagger UI:
 - **Health Check**: `/` - Server status verification
 - **Test Endpoint**: `/test-swagger` - Swagger configuration verification
 
+### Advanced Implementation Guide
+
+For developers implementing Swagger UI in serverless environments or troubleshooting documentation issues, we provide a comprehensive technical tutorial:
+
+📖 **[SWAGGER_IMPLEMENTATION_GUIDE.md](./SWAGGER_IMPLEMENTATION_GUIDE.md)**
+
+This in-depth guide covers:
+
+- **Serverless Compatibility**: Solutions for swagger-ui-express limitations on Vercel and similar platforms
+- **Custom HTML Template Implementation**: CDN-based asset loading for reliable documentation rendering
+- **OpenAPI 3.0 Configuration**: Complete setup patterns and best practices
+- **Route Documentation Patterns**: JSDoc annotation strategies and schema definitions
+- **Testing and Validation**: Automated verification scripts and deployment procedures
+- **Maintenance Best Practices**: Long-term documentation management and performance optimization
+
+**Who should read it:**
+- Developers implementing Swagger UI in new Node.js projects
+- Teams migrating from traditional hosting to serverless platforms
+- Anyone experiencing CSS/JavaScript loading issues with Swagger UI
+- Developers seeking production-ready API documentation solutions
+
+**When to use it:**
+- Setting up Swagger UI for the first time
+- Troubleshooting documentation rendering issues
+- Migrating existing APIs to serverless deployment
+- Implementing advanced documentation features
+
 ## 🔗 Available Endpoints
 
 ### User Management (`/api/v0/user`)
