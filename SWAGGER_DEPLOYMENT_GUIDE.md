@@ -6,9 +6,9 @@
 **Issue**: Vercel's serverless environment doesn't handle static file serving the same way as traditional servers.
 **Fix**: Removed the problematic static file serving line and configured Swagger UI to work with Vercel's serverless architecture.
 
-### 2. Swagger UI Version Compatibility
-**Issue**: Newer versions of swagger-ui-express (5.x) have known issues with serverless deployments.
-**Fix**: Downgraded to swagger-ui-express version 4.6.2 which is proven to work with Vercel.
+### 2. CSS/JavaScript Asset Loading Issue
+**Issue**: swagger-ui-express couldn't serve CSS and JavaScript assets properly on Vercel, resulting in unstyled HTML.
+**Fix**: Replaced swagger-ui-express with a custom HTML template that loads Swagger UI assets from CDN.
 
 ### 3. API Path Configuration
 **Issue**: Swagger documentation was not properly linked to actual route files.
@@ -21,13 +21,15 @@
 ## Changes Made
 
 ### 1. Server.js Updates
-- Removed problematic static file serving
-- Improved Swagger UI configuration for Vercel compatibility
+- Replaced swagger-ui-express with custom HTML template
+- Implemented CDN-based asset loading for CSS and JavaScript
 - Added proper CORS headers for swagger.json endpoint
 - Added test endpoint to verify Swagger spec generation
+- Custom HTML template loads Swagger UI from cdnjs.cloudflare.com
 
 ### 2. Package.json Updates
-- Downgraded swagger-ui-express from ^5.0.1 to ^4.6.2
+- Removed dependency on swagger-ui-express for asset serving
+- Kept swagger-jsdoc for API specification generation
 
 ### 3. appSwagger.js Updates
 - Updated API references to point to actual route files
@@ -77,14 +79,24 @@ After deployment, test these endpoints to ensure everything works:
 - **Test Endpoint**: `/test-swagger`
 - **Health Check**: `/`
 
+## Key Technical Solution
+
+The main fix was replacing the problematic swagger-ui-express middleware with a custom HTML template that:
+
+1. **Loads CSS from CDN**: Uses `https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.css`
+2. **Loads JavaScript from CDN**: Uses swagger-ui-bundle.js and swagger-ui-standalone-preset.js from CDN
+3. **Fetches API spec dynamically**: Loads the OpenAPI specification from `/swagger.json` endpoint
+4. **Works in serverless environment**: No dependency on local file system or static file serving
+
 ## Troubleshooting
 
-If you still see a blank page:
+If you still see issues:
 
-1. Check browser console for JavaScript errors
-2. Verify the swagger.json endpoint returns valid JSON
-3. Check the test-swagger endpoint for spec generation issues
-4. Ensure all route files are properly referenced in appSwagger.js
+1. **Check browser console** for JavaScript errors
+2. **Verify swagger.json endpoint** returns valid JSON at `/swagger.json`
+3. **Test spec generation** using `/test-swagger` endpoint
+4. **Ensure CDN access** - verify your deployment can access cdnjs.cloudflare.com
+5. **Check route files** are properly referenced in appSwagger.js
 
 ## API Documentation Structure
 
