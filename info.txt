@@ -1,7 +1,7 @@
 Users APis:
 
 Get All User API:    https://eb-project-backend-kappa.vercel.app/api/v0/user/getUserAll
-GetSpecificUserAPI:  https://eb-project-backend-kappa.vercel.app/api/v0/user/getSpecificUser/:id
+GetSpecificUserAPI:  https://eb-project-backend-kappa.vercel.app/api/v0/user/getSpecificUser/:email
 Create User API:     https://eb-project-backend-kappa.vercel.app/api/v0/user/createUser
 Login User API:      https://eb-project-backend-kappa.vercel.app/api/v0/user/loginUser
 Delete User API:     https://eb-project-backend-kappa.vercel.app/api/v0/user/deleteUser/:id

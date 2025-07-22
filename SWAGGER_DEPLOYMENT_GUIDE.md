@@ -56,9 +56,9 @@
    ```bash
    npm run dev
    ```
-   - Visit http://localhost:3000/api-docs to verify Swagger UI works
-   - Visit http://localhost:3000/swagger.json to verify JSON spec generation
-   - Visit http://localhost:3000/test-swagger to verify spec generation
+   - Visit http://localhost:3003/api-docs to verify Swagger UI works
+   - Visit http://localhost:3003/swagger.json to verify JSON spec generation
+   - Visit http://localhost:3003/test-swagger to verify spec generation
 
 3. **Deploy to Vercel**
    ```bash
@@ -66,9 +66,9 @@
    ```
 
 4. **Verify Deployment**
-   - Visit https://your-domain.vercel.app/api-docs
-   - Check https://your-domain.vercel.app/swagger.json
-   - Test https://your-domain.vercel.app/test-swagger
+   - Visit https://https://eb-project-backend-kappa.vercel.app/api-docs
+   - Check https://https://eb-project-backend-kappa.vercel.app/swagger.json
+   - Test https://eb-project-backend-kappa.vercel.app/test-swagger
 
 ## Testing Endpoints
 
