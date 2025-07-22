@@ -1,6 +1,6 @@
 const exp = require('express');
 const router = exp.Router();
-const { CreateUser,LoginUser,UpdateUser,DeleteUser,GetUserAll,GetSpecificUser,PlantsData } = require('../controllers/UserController');
+const { CreateUser,LoginUser,UpdateUser,DeleteUser,GetUserAll,GetSpecificUser } = require('../controllers/UserController');
 const {AddToCart} = require('../controllers/CartController');
 
 /**
@@ -32,23 +32,25 @@ const {AddToCart} = require('../controllers/CartController');
  *         name: John Doe
  *         email: john@example.com
  *         password: hashedpassword
- *     Cart:
- *       type: object
- *       properties:
- *         userId:
- *           type: string
- *           description: User ID
- *         plantId:
- *           type: string
- *           description: Plant ID
- *         quantity:
- *           type: number
- *           description: Quantity of plants
- *       example:
- *         userId: 60c72b2f9b1e8e001c8e4b8a
- *         plantId: 60c72b2f9b1e8e001c8e4b8b
- *         quantity: 2
  */
+
+//This is for cart schema for future use.
+// Cart:
+//  *       type: object
+//  *       properties:
+//  *         userId:
+//  *           type: string
+//  *           description: User ID
+//  *         plantId:
+//  *           type: string
+//  *           description: Plant ID
+//  *         quantity:
+//  *           type: number
+//  *           description: Quantity of plants
+//  *       example:
+//  *         userId: 60c72b2f9b1e8e001c8e4b8a
+//  *         plantId: 60c72b2f9b1e8e001c8e4b8b
+//  *         quantity: 2
 
 /**
  * @swagger
@@ -261,33 +263,33 @@ router.get('/getUserAll', GetUserAll);
  */
 router.get('/getSpecificUser/:email', GetSpecificUser);
 
-/**
- * @swagger
- * /api/v0/user/addToCart:
- *   post:
- *     summary: Add item to cart
- *     tags: [Cart]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Cart'
- *     responses:
- *       200:
- *         description: Item added to cart successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 msg:
- *                   type: string
- *                 cart:
- *                   $ref: '#/components/schemas/Cart'
- *       400:
- *         description: Bad request
- */
-router.post('/addToCart', AddToCart);
+// /**
+//  * @swagger
+//  * /api/v0/user/addToCart:
+//  *   post:
+//  *     summary: Add item to cart
+//  *     tags: [Cart]
+//  *     requestBody:
+//  *       required: true
+//  *       content:
+//  *         application/json:
+//  *           schema:
+//  *             $ref: '#/components/schemas/Cart'
+//  *     responses:
+//  *       200:
+//  *         description: Item added to cart successfully
+//  *         content:
+//  *           application/json:
+//  *             schema:
+//  *               type: object
+//  *               properties:
+//  *                 msg:
+//  *                   type: string
+//  *                 cart:
+//  *                   $ref: '#/components/schemas/Cart'
+//  *       400:
+//  *         description: Bad request
+//  */
+// router.post('/addToCart', AddToCart);
 
 module.exports = router;
