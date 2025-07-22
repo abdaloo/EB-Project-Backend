@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { GetUserAll, CreateUser } = require('../controllers/UserController');
+const { CreateUser,LoginUser,UpdateUser,DeleteUser,GetUserAll,GetSpecificUser } = require('../controllers/UserController');
 
 /**
  * @swagger
@@ -80,17 +80,17 @@ router.post('/createUser', CreateUser);
 
 /**
  * @swagger
- * /api/v0/user/getSpecificUser/{id}:
+ * /api/v0/user/getSpecificUser/{email}:
  *   get:
- *     summary: Get a specific user by ID
+ *     summary: Get a specific user by email
  *     tags: [Users]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: email
  *         required: true
  *         schema:
  *           type: string
- *         description: The user ID
+ *         description: The user email
  *     responses:
  *       200:
  *         description: User found
@@ -106,6 +106,7 @@ router.post('/createUser', CreateUser);
  *       404:
  *         description: User not found
  */
+router.get('/getSpecificUser/:email', GetSpecificUser);
 
 /**
  * @swagger
@@ -135,6 +136,7 @@ router.post('/createUser', CreateUser);
  *       404:
  *         description: User not found
  */
+router.delete('/deleteUser/:id', DeleteUser);
 
 /**
  * @swagger
@@ -170,6 +172,8 @@ router.post('/createUser', CreateUser);
  *       404:
  *         description: User not found
  */
+router.put('/updateUser/:id', UpdateUser);
+
 
 /**
  * @swagger
@@ -207,5 +211,7 @@ router.post('/createUser', CreateUser);
  *       402:
  *         description: Password is incorrect
  */
+router.post('/loginUser', LoginUser);
+
 
 module.exports = router;

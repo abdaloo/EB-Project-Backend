@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 require('dotenv').config({ quiet: true });
+const path = require("path");
 
 const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
@@ -21,13 +22,14 @@ app.use(cors());
 app.use(express.json());
 
 // Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true, customCssUrl: CSS_URL }));
+app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
 app.get('/swagger.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   // res.setHeader('Access-Control-Allow-Origin', '*'); 
   res.send(swaggerSpec);
 });
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
 
 // Connect MongoDB
 connectDB();

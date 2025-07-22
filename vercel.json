@@ -5,20 +5,16 @@
   ],
   "routes": [
     {
-      "src": "/api-docs",
+      "src": "/api-docs/(.*)",
       "dest": "/Server.js"
     },
     {
-      "src": "/api-docs/(.*)",
+      "src": "/swagger.json",
       "dest": "/Server.js"
     },
     {
       "src": "/(.*)",
       "dest": "/Server.js"
     }
-  ],
-  "rewrites": [
-    { "source": "/api-docs", "destination": "/api/api-docs" },
-    { "source": "/swagger.json", "destination": "/api/swagger.json" }
   ]
 }
