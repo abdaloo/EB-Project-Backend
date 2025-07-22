@@ -52,34 +52,34 @@ async function testEndpoint(baseUrl, endpoint) {
     const response = await makeRequest(url);
     
     if (response.statusCode === 200) {
-      console.log(`✅ ${endpoint.description} - OK`);
+      console.log(`${endpoint.description} - OK`);
       
       // Additional checks for specific endpoints
       if (endpoint.path === '/swagger.json') {
         try {
           const spec = JSON.parse(response.body);
           const pathCount = Object.keys(spec.paths || {}).length;
-          console.log(`   📊 Found ${pathCount} API paths`);
+          console.log(`Found ${pathCount} API paths`);
         } catch (e) {
-          console.log(`   ⚠️  Invalid JSON response`);
+          console.log(`Invalid JSON response`);
         }
       }
       
       if (endpoint.path === '/api-docs') {
         if (response.body.includes('swagger-ui') && response.body.includes('cdnjs.cloudflare.com')) {
-          console.log(`   📄 HTML contains CDN references - Good!`);
+          console.log(`HTML contains CDN references - Good!`);
         } else {
-          console.log(`   ⚠️  HTML might not load properly`);
+          console.log(`HTML might not load properly`);
         }
       }
       
       return true;
     } else {
-      console.log(`❌ ${endpoint.description} - Status: ${response.statusCode}`);
+      console.log(`${endpoint.description} - Status: ${response.statusCode}`);
       return false;
     }
   } catch (error) {
-    console.log(`❌ ${endpoint.description} - Error: ${error.message}`);
+    console.log(`${endpoint.description} - Error: ${error.message}`);
     return false;
   }
 }
@@ -88,7 +88,7 @@ async function testEndpoint(baseUrl, endpoint) {
  * Run all tests
  */
 async function runTests(baseUrl) {
-  console.log(`\n🧪 Testing Swagger UI deployment at: ${baseUrl}\n`);
+  console.log(`\nTesting Swagger UI deployment at: ${baseUrl}\n`);
   
   let passed = 0;
   let total = endpoints.length;
@@ -99,12 +99,12 @@ async function runTests(baseUrl) {
     console.log(''); // Empty line for readability
   }
   
-  console.log(`\n📊 Results: ${passed}/${total} tests passed`);
+  console.log(`\nResults: ${passed}/${total} tests passed`);
   
   if (passed === total) {
-    console.log('🎉 All tests passed! Swagger UI should be working correctly.');
+    console.log('All tests passed! Swagger UI should be working correctly.');
   } else {
-    console.log('⚠️  Some tests failed. Check the output above for details.');
+    console.log('Some tests failed. Check the output above for details.');
   }
   
   return passed === total;
