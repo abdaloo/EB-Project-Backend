@@ -5,18 +5,27 @@ const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "EB Planty User API Documentation",
+      title: "EB Planty API Documentation",
       version: "1.0.0",
       description:
-        "Welcome to the EB Planty User API!\n\nThis interactive documentation provides a comprehensive overview of all userrelated endpoints for the EB Planty platform. Easily manage user accounts, authentication, and profile operations with clear request and response examples.\n\nExplore, test, and integrate with confidence.",
+        "Welcome to the EB Planty API!\n\nThis interactive documentation provides a comprehensive overview of all endpoints for the EB Planty platform. Easily manage user accounts, authentication, plant operations, and more with clear request and response examples.\n\nExplore, test, and integrate with confidence.",
     },
     servers: [
       {
         url: "https://eb-project-backend-kappa.vercel.app",
+        description: "Production server"
+      },
+      {
+        url: "http://localhost:3000",
+        description: "Development server"
       },
     ],
   },
-  apis: ["./routes/*.js"],
+  apis: [
+    "./routes/userSwagger.js",
+    "./routes/PlantRoute.js",
+    "./routes/UserRoute.js"
+  ],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);

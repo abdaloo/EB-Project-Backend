@@ -2,9 +2,6 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 require('dotenv').config({ quiet: true });
-const path = require("path");
-
-const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
 // Routes
 const UserRoute = require('./routes/UserRoute');
@@ -21,15 +18,26 @@ const swaggerSpec = require('./appSwagger');
 app.use(cors());
 app.use(express.json());
 
-// Swagger UI
-app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
+// Swagger UI configuration for Vercel
+const swaggerOptions = {
+  explorer: true,
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: "EB Planty API Documentation",
+  swaggerOptions: {
+    url: '/swagger.json',
+  }
+};
+
+// Swagger JSON endpoint
 app.get('/swagger.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
-  // res.setHeader('Access-Control-Allow-Origin', '*'); 
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.send(swaggerSpec);
 });
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
+// Swagger UI routes - using serve and setup separately for better Vercel compatibility
+app.use('/api-docs', swaggerUi.serve);
+app.get('/api-docs', swaggerUi.setup(swaggerSpec, swaggerOptions));
 
 // Connect MongoDB
 connectDB();
@@ -37,6 +45,23 @@ connectDB();
 // Health check
 app.get('/', (req, res) => {
   res.send('Server is up & running');
+});
+
+// Test endpoint to verify Swagger spec generation
+app.get('/test-swagger', (req, res) => {
+  try {
+    res.json({
+      message: 'Swagger spec generated successfully',
+      hasSpec: !!swaggerSpec,
+      specKeys: Object.keys(swaggerSpec || {}),
+      pathsCount: swaggerSpec?.paths ? Object.keys(swaggerSpec.paths).length : 0
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Error generating Swagger spec',
+      error: error.message
+    });
+  }
 });
 
 // Main routes
