@@ -16,13 +16,12 @@ const swaggerOptions = {
         description: "Production server"
       },
       {
-        url: "http://localhost:3000",
+        url: "http://localhost:3003",
         description: "Development server"
       },
     ],
   },
   apis: [
-    "./routes/userSwagger.js",
     "./routes/PlantRoute.js",
     "./routes/UserRoute.js"
   ],
