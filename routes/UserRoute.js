@@ -57,6 +57,8 @@ const { CreateUser,LoginUser,UpdateUser,DeleteUser,GetUserAll,GetSpecificUser } 
  *                 format: email
  *               password:
  *                 type: string
+ *               confirmPassword:
+ *                 type: string
  *     responses:
  *       201:
  *         description: User created successfully
