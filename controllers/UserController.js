@@ -56,6 +56,7 @@ exports.CreateUser = async (req, res) => {
 
         // Send response with token
         return res.status(201).send({
+            status:201,
             msg: 'User created successfully',
             user: {
                 id: newUser._id,
@@ -91,7 +92,12 @@ exports.LoginUser = async (req, res) =>{
              { expiresIn: '1d' }
             );
 
-        return res.status(200).json({msg: 'Login successful', Token:token, users:user });
+        return res.status(200).json({
+            status:200,
+            msg: 'Login successful',
+            users:user ,
+            Token:token
+        });
 
     }catch (error) {
         res.status(500).json({ message: 'Error logging in user', error: error.message });
@@ -107,7 +113,7 @@ exports.UpdateUser = async (req, res) => {
              return res.status(404).send({ msg: 'User not found' });
          }
 
-        return res.status(200).json({ msg: 'User Updated', NewUser: UpdateUser });
+        return res.status(200).json({ status:200,msg: 'User Updated', NewUser: UpdateUser });
 
     }catch (error) {
         res.status(500).json({ message: 'Error updating user', error: error.message });
@@ -121,7 +127,7 @@ exports.DeleteUser = async (req, res) => {
     if (!DeletUser) {
         return res.status(404).send({ msg: 'User not found' });
     }
-    return res.status(200).json({ msg: 'User Deleted', DeletedUser: DeletUser });
+    return res.status(200).json({ status:200,msg: 'User Deleted', DeletedUser: DeletUser });
   }catch (error) {
     res.status(500).json({ message: 'Error deleting user', error: error.message });
   }
@@ -134,7 +140,7 @@ exports.GetUserAll = async (req, res) =>{
         if (!users) {
             return res.status(404).send({ msg: 'No users found' });
         }
-        return res.status(200).json({ msg: 'Users fetched successfully', users: users });
+        return res.status(200).json({status:200, msg: 'Users fetched successfully', users: users });
 
     }catch (error) {
         res.status(500).json({ message: 'Error fetching users', error: error.message });
@@ -149,7 +155,7 @@ exports.GetSpecificUser = async (req,res) =>{
 
         if(!FindUser) return res.status(404).json({msg: "User not found"});
 
-        return res.status(200).json({msg: "User Successfully Found", NewUser: FindUser});
+        return res.status(200).json({status:200,msg: "User Successfully Found", NewUser: FindUser});
         
     } catch (error) {
         res.status(500).json({ message: 'Error fetching users', error: error.message });  

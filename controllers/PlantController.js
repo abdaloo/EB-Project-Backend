@@ -22,6 +22,7 @@ exports.uploadPlantImage = async (req, res) => {
             try {
                 const result = await uploadToCloudinary(req.file);
                 res.status(201).json({
+                    status:201,
                     message: 'Image uploaded successfully',
                     imageUrl: result.secure_url,
                 });
@@ -58,8 +59,9 @@ exports.createPlant = async (req, res) => {
         await plant.save();
 
         res.status(201).json({
+            status:201,
             message: 'Plant created successfully',
-            plant
+            data:plant
         });
     } catch (error) {
         res.status(500).json({ message: 'Error creating plant', error: error.message });
@@ -71,8 +73,8 @@ exports.getAllPlants = async (req, res) => {
     try {
         const plants = await Plant.find();
         res.status(200).json({
-            message: 'Plants fetched successfully',
             status: 200,
+            message: 'Plants fetched successfully',
             data:plants
         });
     } catch (error) {
@@ -88,8 +90,9 @@ exports.getPlant = async (req, res) => {
             return res.status(404).json({ message: 'Plant not found' });
         }
         res.status(200).json({
+            status:200,
             message: 'Plant fetched successfully',
-            plant
+            data:plant
         });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching plant', error: error.message });
@@ -108,8 +111,9 @@ exports.updatePlant = async (req, res) => {
             return res.status(404).json({ message: 'Plant not found' });
         }
         res.status(200).json({
+            status:200,
             message: 'Plant updated successfully',
-            plant
+            data:plant
         });
     } catch (error) {
         res.status(500).json({ message: 'Error updating plant', error: error.message });
@@ -124,8 +128,9 @@ exports.deletePlant = async (req, res) => {
             return res.status(404).json({ message: 'Plant not found' });
         }
         res.status(200).json({
+            status:200,
             message: 'Plant deleted successfully',
-            plant
+            data:plant
         });
     } catch (error) {
         res.status(500).json({ message: 'Error deleting plant', error: error.message });
