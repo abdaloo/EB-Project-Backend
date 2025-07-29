@@ -49,6 +49,7 @@ const { CreateUser,LoginUser,UpdateUser,DeleteUser,GetUserAll,GetSpecificUser } 
  *               - name
  *               - email
  *               - password
+ *               - confirmPassword
  *             properties:
  *               name:
  *                 type: string

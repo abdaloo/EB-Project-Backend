@@ -26,7 +26,7 @@ exports.CreateUser = async (req, res) => {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!passwordRegex.test(password)) {
         return res.status(400).send({
-            msg: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one number'
+            msg: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one special character i.e @#$!%*?& and one number'
         });
         }
 
