@@ -72,7 +72,8 @@ exports.getAllPlants = async (req, res) => {
         const plants = await Plant.find();
         res.status(200).json({
             message: 'Plants fetched successfully',
-            plants
+            status: 200,
+            data:plants
         });
     } catch (error) {
         res.status(500).json({ message: 'Error fetching plants', error: error.message });
