@@ -6,7 +6,7 @@ const SendOtpEmail = async(to,otp)=>{
         service : 'gmail',
         auth:{
             user: process.env.SMTP_User,
-            pass: process.env.SMTP_Password
+            pass: process.env.SMTP_Pass
         }
     });
 

@@ -179,6 +179,7 @@ exports.SendOtpEmail = async (req, res) => {
         console.log("Otp sent successfully",otp);
         return res.status(200).send({ msg: 'Otp sent successfully' });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: 'Error sending otp', error: error.message });
     }
 }
