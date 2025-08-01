@@ -22,7 +22,8 @@ const swaggerOptions = {
   },
   apis: [
     "./routes/PlantRoute.js",
-    "./routes/UserRoute.js"
+    "./routes/UserRoute.js",
+    "./routes/OrderRoutes.js"
   ],
 };
 

@@ -161,13 +161,14 @@ exports.AddToCart = async (req, res) => {
         if (price <= 0) {
             return res.status(400).json({ message: 'Price must be greater than 0' });
         }
-        const Price = price * quantity;
+
 
         // Check if plant exists
         const plant = await Plant.findById(plantId);
         if (!plant) {
             return res.status(404).json({ message: 'Plant not found' });
         }
+         const Price = price * quantity;
 
         const cart = new AddToCart({
             plantId,

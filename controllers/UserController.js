@@ -1,7 +1,7 @@
 const User = require('../models/UserModel');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-
+const SendOtpEmail = require('../utils/SendOtpEmail');
 exports.CreateUser = async (req, res) => {
     try {
         const { name, email, password,confirmPassword } = req.body;
@@ -159,5 +159,46 @@ exports.GetSpecificUser = async (req,res) =>{
         
     } catch (error) {
         res.status(500).json({ message: 'Error fetching users', error: error.message });  
+    }
+}
+
+exports.SendOtpEmail = async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) return res.status(400).send({ msg: 'Email is required' });
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).send({ msg: 'User not found' });
+        
+        const otp = Math.floor(1000 + Math.random() * 9000).toString() + // 4 digits
+        String.fromCharCode(65 + Math.floor(Math.random() * 26)) + // Random uppercase letter
+        String.fromCharCode(65 + Math.floor(Math.random() * 26));  // Another random uppercase letter
+        user.otp = otp;
+        user.otpExpires = Date.now() + 10 * 60 * 1000;    
+        await user.save();
+        await SendOtpEmail(email, otp);
+        console.log("Otp sent successfully",otp);
+        return res.status(200).send({ msg: 'Otp sent successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error sending otp', error: error.message });
+    }
+}
+
+exports.ResetPassword = async (req, res) => {
+    try {
+        const { email, otp, password ,confirmPassword} = req.body;
+        if (!email || !otp || !password || !confirmPassword) return res.status(400).send({ msg: 'Email, otp , password and confirmPassword are required' });
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).send({ msg: 'User not found' });
+        if (user.otp !== otp) return res.status(400).send({ msg: 'Invalid otp' });
+        if (Date.now() > user.otpExpires) return res.status(400).send({ msg: 'Otp expired' });
+        if (password !== confirmPassword) return res.status(400).send({ msg: 'Passwords do not match' });
+        const hashPassword = await bcrypt.hash(password, 10);
+        user.password = hashPassword;
+        user.otp = null;
+        user.otpExpires = null;
+        await user.save();
+        return res.status(200).send({ msg: 'Password reset successfully', user });
+    } catch (error) {
+        res.status(500).json({ message: 'Error resetting password', error: error.message });
     }
 }

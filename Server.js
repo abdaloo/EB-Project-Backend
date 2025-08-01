@@ -6,7 +6,7 @@ require('dotenv').config({ quiet: true });
 // Routes
 const UserRoute = require('./routes/UserRoute');
 const PlantRoute = require('./routes/PlantRoute');
-
+const OrderRoute = require('./routes/OrderRoutes');
 // DB connection
 const connectDB = require('./config/ConnectDb');
 
@@ -61,6 +61,7 @@ app.get('/test-swagger', (req, res) => {
 // Main routes
 app.use('/api/v0/user', UserRoute);
 app.use('/api/v0/plants', PlantRoute);
+app.use('/api/v0/orders', OrderRoute);
 
 // For Vercel: export app instead of listen()
 module.exports = app;

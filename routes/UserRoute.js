@@ -1,6 +1,6 @@
 const exp = require('express');
 const router = exp.Router();
-const { CreateUser,LoginUser,UpdateUser,DeleteUser,GetUserAll,GetSpecificUser } = require('../controllers/UserController');
+const { CreateUser,LoginUser,UpdateUser,DeleteUser,GetUserAll,GetSpecificUser,SendOtpEmail,ResetPassword } = require('../controllers/UserController');
 
 /**
  * @swagger
@@ -246,5 +246,76 @@ router.get('/getUserAll', GetUserAll);
  *         description: User not found
  */
 router.get('/getSpecificUser/:email', GetSpecificUser);
+
+/**
+ * @swagger
+ * /api/v0/user/forgotPassword:
+ *   post:
+ *     summary: Forgot password
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *     responses:
+ *       200:
+ *         description: Otp sent successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ */
+router.post('/forgotPassword', SendOtpEmail);
+
+/**
+ * @swagger
+ * /api/v0/user/resetPassword:
+ *   post:
+ *     summary: Reset password
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *               - otp
+ *               - confirmPassword
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *               otp:
+ *                 type: string
+ *               confirmPassword:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 msg:
+ *                   type: string
+ */
+router.post('/resetPassword', ResetPassword);
 
 module.exports = router;
