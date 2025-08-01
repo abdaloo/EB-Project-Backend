@@ -177,10 +177,10 @@ exports.SendOtpEmail = async (req, res) => {
         await user.save();
         await SendOtpEmail(email, otp);
         console.log("Otp sent successfully",otp);
-        return res.status(200).send({ msg: 'Otp sent successfully' });
+        return res.status(200).send({ status:200,msg: 'Otp sent successfully' });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: 'Error sending otp', error: error.message });
+        res.status(500).json({ status:500, message: 'Error sending otp', error: error.message });
     }
 }
 
@@ -198,8 +198,8 @@ exports.ResetPassword = async (req, res) => {
         user.otp = null;
         user.otpExpires = null;
         await user.save();
-        return res.status(200).send({ msg: 'Password reset successfully', user });
+        return res.status(200).send({ status:200, msg: 'Password reset successfully', user });
     } catch (error) {
-        res.status(500).json({ message: 'Error resetting password', error: error.message });
+        res.status(500).json({ status:500, message: 'Error resetting password', error: error.message });
     }
 }
