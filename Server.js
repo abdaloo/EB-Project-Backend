@@ -46,6 +46,8 @@ app.get('/test-swagger', (req, res) => {
   try {
     res.json({
       message: 'Swagger spec generated successfully',
+
+      
       hasSpec: !!swaggerSpec,
       specKeys: Object.keys(swaggerSpec || {}),
       pathsCount: swaggerSpec?.paths ? Object.keys(swaggerSpec.paths).length : 0
